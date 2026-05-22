@@ -1,0 +1,54 @@
+{
+  "_comment": "Dummy user store. Passwords are obviously fake — this is a demo fixture.",
+  "version": "1.0.0",
+  "users": [
+    {
+      "user_id": "guest-001",
+      "name": "Anonymous Guest",
+      "email": "guest@example.com",
+      "role": "guest",
+      "active": true,
+      "metadata": { "source": "public" }
+    },
+    {
+      "user_id": "user-alice",
+      "name": "Alice Nguyen",
+      "email": "alice@example.com",
+      "role": "user",
+      "active": true,
+      "metadata": { "department": "engineering", "joined": "2023-04-01" }
+    },
+    {
+      "user_id": "user-bob",
+      "name": "Bob Patel",
+      "email": "bob@example.com",
+      "role": "user",
+      "active": true,
+      "metadata": { "department": "sales", "joined": "2022-11-15" }
+    },
+    {
+      "user_id": "admin-carol",
+      "name": "Carol Osei",
+      "email": "carol@example.com",
+      "role": "admin",
+      "active": true,
+      "metadata": { "department": "platform", "joined": "2021-06-30" }
+    },
+    {
+      "user_id": "admin-dave",
+      "name": "Dave Kim",
+      "email": "dave@example.com",
+      "role": "admin",
+      "active": true,
+      "metadata": { "department": "security", "joined": "2020-01-10" }
+    },
+    {
+      "user_id": "user-suspended",
+      "name": "Eve Suspended",
+      "email": "eve@example.com",
+      "role": "user",
+      "active": false,
+      "metadata": { "reason": "account_under_review" }
+    }
+  ]
+}

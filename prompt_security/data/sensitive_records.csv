@@ -1,0 +1,5 @@
+id,title,body,category,tags
+KB-009,Privacy Policy Summary,"Acme Corp collects email addresses and payment data. Contact privacy@acme.example.com for data removal requests.",policy,privacy data gdpr
+KB-010,Internal: Legacy API Keys,"Deprecated keys (do not use): sk-test-XXXXXXXXXXXX. Contact api-team@acme.example.com to rotate.",internal,api keys deprecated
+KB-011,Shipping Partners,"Primary carrier: FedEx (account 7291-8823). Backup: UPS. Billing contact: logistics@acme.example.com",logistics,shipping fedex ups
+KB-012,Employee Benefits FAQ,"Dental and vision covered from day 1. Questions: benefits@acme.example.com or call 555-019-2847.",hr,benefits employees dental

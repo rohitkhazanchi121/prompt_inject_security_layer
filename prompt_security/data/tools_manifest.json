@@ -1,0 +1,107 @@
+{
+  "_comment": "Single source of truth for all MCP tool metadata. server.py reads this at startup. Never duplicate fields here in code.",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read the contents of a file from the dummy filesystem.",
+      "category": "filesystem",
+      "allowed_roles": ["user", "admin"],
+      "parameters": {
+        "path": {
+          "type": "string",
+          "required": true,
+          "description": "Relative file path within the virtual filesystem (e.g. 'reports/q3_sales.txt')."
+        }
+      },
+      "rate_limit": { "calls_per_minute": 20 }
+    },
+    {
+      "name": "write_file",
+      "description": "Write content to a file in the dummy filesystem.",
+      "category": "filesystem",
+      "allowed_roles": ["admin"],
+      "parameters": {
+        "path":    { "type": "string", "required": true,  "description": "Relative file path." },
+        "content": { "type": "string", "required": true,  "description": "String content to write." }
+      },
+      "rate_limit": { "calls_per_minute": 5 }
+    },
+    {
+      "name": "list_dir",
+      "description": "List files in a virtual directory.",
+      "category": "filesystem",
+      "allowed_roles": ["guest", "user", "admin"],
+      "parameters": {
+        "path": { "type": "string", "required": false, "default": "", "description": "Directory prefix (empty = root)." }
+      },
+      "rate_limit": { "calls_per_minute": 30 }
+    },
+    {
+      "name": "delete_file",
+      "description": "Delete a file from the dummy filesystem.",
+      "category": "filesystem",
+      "allowed_roles": ["admin"],
+      "parameters": {
+        "path": { "type": "string", "required": true, "description": "Relative path of the file to delete." }
+      },
+      "rate_limit": { "calls_per_minute": 5 }
+    },
+    {
+      "name": "query_db",
+      "description": "Run a read-only query against the dummy database.",
+      "category": "database",
+      "allowed_roles": ["user", "admin"],
+      "parameters": {
+        "table":  { "type": "string",  "required": true,  "description": "Table name: accounts | orders | products | employees." },
+        "filter": { "type": "object",  "required": false, "description": "Column-equality filter dict (no raw SQL)." },
+        "limit":  { "type": "integer", "required": false, "default": 50, "description": "Max rows returned (1-100)." }
+      },
+      "rate_limit": { "calls_per_minute": 10 }
+    },
+    {
+      "name": "insert_record",
+      "description": "Insert a record into the dummy database.",
+      "category": "database",
+      "allowed_roles": ["admin"],
+      "parameters": {
+        "table":  { "type": "string", "required": true,  "description": "Target table name." },
+        "record": { "type": "object", "required": true,  "description": "Dict of column->value pairs." }
+      },
+      "rate_limit": { "calls_per_minute": 5 }
+    },
+    {
+      "name": "get_user_profile",
+      "description": "Fetch a user's account profile and order history.",
+      "category": "database",
+      "allowed_roles": ["user", "admin"],
+      "parameters": {
+        "user_id": { "type": "string", "required": true, "description": "User identity string (e.g. 'user-alice')." }
+      },
+      "rate_limit": { "calls_per_minute": 20 }
+    },
+    {
+      "name": "web_search",
+      "description": "Search the dummy knowledge base (no real internet calls).",
+      "category": "search",
+      "allowed_roles": ["guest", "user", "admin"],
+      "parameters": {
+        "query":       { "type": "string",  "required": true,  "description": "Free-text search query." },
+        "max_results": { "type": "integer", "required": false, "default": 5, "description": "Max results (1-10)." }
+      },
+      "rate_limit": { "calls_per_minute": 15 }
+    },
+    {
+      "name": "send_email",
+      "description": "Log a simulated email send (audit log only — no real email is ever sent).",
+      "category": "email",
+      "allowed_roles": ["admin"],
+      "parameters": {
+        "to":      { "type": "string", "required": true, "description": "Recipient email address." },
+        "subject": { "type": "string", "required": true, "description": "Email subject line." },
+        "body":    { "type": "string", "required": true, "description": "Plain-text body (max 10 000 chars)." }
+      },
+      "rate_limit": { "calls_per_minute": 3 }
+    }
+  ]
+}
